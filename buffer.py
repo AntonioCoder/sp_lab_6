@@ -141,7 +141,7 @@ class Lab6():
                 elif self.lexems[i][0] == NUM:
                     return ("unexpected number in definition statement", self.lexems[i][2])
                 elif self.lexems[i][0] == OPR or self.lexems[i][0] == self.lexems[i][1]:
-                    if self.lexems[i][1] not in "*(,)":
+                    if self.lexems[i][1] not in "*,":
                         return ("unexpected operator in definition statement", self.lexems[i][2])
                 elif self.lexems[i][0] == UNK:
                     return ("Unknown token".format(self.lexems[i][1]), self.lexems[i][2])
@@ -284,7 +284,7 @@ class Lab6():
                     for d in range(i, j):
                         self.poped += 1
                         buffer.pop(i)
-                    i += 1
+                    # i += 1
                 elif buffer[i][1] in ["++", "--"]:
                     if i > 0 and buffer[i - 1][0] == VAR:
                         buffer[i - 1][0] = VAL
@@ -491,7 +491,8 @@ class _Var:
         self.val = kwargs["val"]
 
 
-text = "float *b, a[5]; int n; b+=(a)[n]+(2+6);"
-analizer = Lab6(string=text)
+# text = "float *b, a[4], c; int n; b+=a[c];"
+text = "float *b, a[5]; char n; b+=a[--n]);"
+lab6 = Lab6(string=text)
 print("\n{}\n".format(text))
-print(analizer.main())
+print(lab6.main())
